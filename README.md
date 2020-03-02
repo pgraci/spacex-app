@@ -1,4 +1,4 @@
-# EVGO-SPACEX-APP
+# SPACEX-APP
 
 ## Search The SpaceX GraphQL server for upcoming and past SpaceX launches.
 
