@@ -8,7 +8,25 @@ import {LAUNCHES_QUERY} from '../data/queries';
 
 import Loader from './Loader';
 
-const renderVideoLink = url => {
+interface Props {
+    rocketName: string;
+    missionName: string;
+    launchYear: string;
+}
+
+interface Launch {
+    id: string;
+    launch_date_local: string;
+    links: {
+        video_link: string;
+    }
+    mission_name: string;
+    rocket: {
+        rocket_name: string;
+    };
+}
+
+const renderVideoLink = (url: string) => {
     if (!url) return;
     return (
         <p className="launch-details">
@@ -19,8 +37,8 @@ const renderVideoLink = url => {
     );
 };
 
-const renderLaunchList = launches =>
-    launches.map(({id, launch_date_local, links, mission_name, rocket}) => (
+const renderLaunchList = (launches: any) =>
+    launches.map(({id, launch_date_local, links, mission_name, rocket}: Launch) => (
         <div key={id} className="launch-wrapper">
             <p className="launch-date">{formatDate(launch_date_local)}</p>
             <p className="launch-mission">MISSION: {mission_name}</p>
@@ -29,7 +47,7 @@ const renderLaunchList = launches =>
         </div>
     ));
 
-const Launches = ({rocketName, missionName, launchYear}) => {
+const Launches = ({rocketName, missionName, launchYear}: Props) => {
     const {loading, error, data} = useQuery(LAUNCHES_QUERY, {
         variables: {rocketName, missionName, launchYear}
     });
@@ -44,7 +62,7 @@ const Launches = ({rocketName, missionName, launchYear}) => {
     // SpaceX GQL server returns duplicate data at times
     const launches = uniqBy(data.launches, 'id');
 
-    return renderLaunchList(launches);
+    return renderLaunchList(launches as any);
 };
 
 export default Launches;

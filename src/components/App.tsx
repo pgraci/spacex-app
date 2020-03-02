@@ -1,4 +1,5 @@
 import React from 'react';
+import { ValueType } from 'react-select';
 
 import {ApolloProvider} from '@apollo/react-hooks';
 import {debounce} from 'lodash';
@@ -9,6 +10,8 @@ import '../styles/styles.css';
 
 import Launches from './Launches';
 import Search from './Search';
+
+type OptionType = { label: string; value: string };
 
 const App = () => {
     const [rocketName, setRocketName] = React.useState('');
@@ -26,18 +29,18 @@ const App = () => {
         setMissionName(value);
     }, 250);
 
-    const handleRocketNameSearch = e => {
+    const handleRocketNameSearch = (e: any) => {
         e.preventDefault();
         handleRocketName(e.target.value);
     };
 
-    const handleMissionNameSearch = e => {
+    const handleMissionNameSearch = (e: any) => {
         e.preventDefault();
         handleMissionName(e.target.value);
     };
 
-    const handleYearSearch = year => {
-        setSearchYear(year);
+    const handleYearSearch = (year: ValueType<OptionType>) => {
+        setSearchYear(year as OptionType);
     };
 
     return (
