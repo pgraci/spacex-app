@@ -44,6 +44,11 @@
     padding: 1rem;
     margin-bottom: 1rem;
     display: flex;
+    transition: background-color 0.3s linear;
+}
+
+.launch:hover {
+    background-color: #eaeaea;
 }
 
 .launch-details {
@@ -63,6 +68,12 @@
 
 .launch-link {
     font-size: 1rem;
+}
+
+.launch-message {
+    color: #eaeaea;
+    font-size: 1.6rem;
+    font-weight: 300;
 }
 
 .launch-mission {

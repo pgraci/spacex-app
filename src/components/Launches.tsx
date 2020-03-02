@@ -45,18 +45,16 @@ const renderThumbnail = (url: string) => {
               'https://www.youtube.com/watch?v=',
               ''
           )}/hqdefault.jpg`;
-    return <img src={thumbnail} alt="thumbnail" className="launch-image" />;
+    return (
+        <a href={url} target="youtube">
+            <img src={thumbnail} alt="thumbnail" className="launch-image" />
+        </a>
+    );
 };
 
 const offsetY = '10px';
 
-const renderTrigger = (offsetY: string) => ({
-    inView,
-    ref
-}: {
-    inView: boolean;
-    ref: any;
-}) => (
+const renderTrigger = () => ({ref}: {ref: any}) => (
     <div
         style={{
             height: '1px',
@@ -101,7 +99,9 @@ const Launches = ({rocketName, missionName, launchYear}: Props) => {
     if (error) return <p>Error :(</p>;
 
     if (!data.launches.length) {
-        return <p className="launch-mission">No matching launches found.</p>;
+        return (
+            <div className="launch-message">No matching launches found.</div>
+        );
     }
 
     const handleLoadMore = () => {
@@ -131,7 +131,7 @@ const Launches = ({rocketName, missionName, launchYear}: Props) => {
             handleLoadMore();
         }
     };
-    const trigger = renderTrigger(offsetY);
+    const trigger = renderTrigger();
 
     // SpaceX GQL server returns duplicate data at times
     const launches = uniqBy(data.launches, 'id');
