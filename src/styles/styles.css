@@ -5,12 +5,15 @@
 }
 
 .app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    height: 18vh;
+}
+
+.logo {
+    height: 4rem;
 }
 
 .search {
+    height: 16vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,47 +29,38 @@
     border-width: 0.1rem;
     padding: 1rem;
     margin-bottom: 1rem;
+    flex-shrink: 1;
 }
 
-@media screen and (min-width: 600px) {
-    .search {
-        flex-direction: row;
-    }
-    .search-input {
-        width: 30%;
-        margin-bottom: 0;
-    }
-
-    .search-year {
-        width: 30%;
-    }
+.launches {
+    height: 56vh;
+    overflow-y: auto;
 }
 
-.logo {
-    height: 4rem;
+.launch {
+    border: 0.1rem solid #eaeaea;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
 }
-
 
 .launch-date {
     font-size: 1.6rem;
     font-weight: 300;
 }
+
 .launch-details {
     font-size: 1.4rem;
 }
+
 .launch-mission {
     font-size: 1.8rem;
     text-transform: uppercase;
     font-weight: 500;
 }
+
 .launch-rocket {
     font-size: 1.6rem;
-}
-.launch-wrapper {
-    border: 0.1rem solid #eaeaea;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 1rem;
 }
 
 .loader {
@@ -112,5 +106,28 @@
     100% {
         stroke-dashoffset: 280;
         transform: rotate(360deg);
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .app-header {
+        height: 8vh;
+    }
+
+    .search {
+        flex-direction: row;
+        height: 3.7rem;
+    }
+    .search-input {
+        width: 30%;
+        margin-bottom: 0;
+    }
+
+    .search-year {
+        width: 30%;
+    }
+
+    .launches {
+        height: 80vh;
     }
 }

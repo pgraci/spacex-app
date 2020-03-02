@@ -1,5 +1,5 @@
 import React from 'react';
-import { ValueType } from 'react-select';
+import {ValueType} from 'react-select';
 
 import {ApolloProvider} from '@apollo/react-hooks';
 import {debounce} from 'lodash';
@@ -11,7 +11,7 @@ import '../styles/styles.css';
 import Launches from './Launches';
 import Search from './Search';
 
-type OptionType = { label: string; value: string };
+type OptionType = {label: string; value: string};
 
 const App = () => {
     const [rocketName, setRocketName] = React.useState('');
@@ -45,11 +45,13 @@ const App = () => {
 
     return (
         <div className="app">
-            <img src={logo} className="logo" alt="logo" />
-            <h1>
-                Search The SpaceX GraphQL server for upcoming and past SpaceX
-                launches.
-            </h1>
+            <div className="app-header">
+                <img src={logo} className="logo" alt="logo" />
+                <h1>
+                    Search The SpaceX GraphQL server for upcoming and past
+                    SpaceX launches.
+                </h1>
+            </div>
             <ApolloProvider client={client}>
                 <Search
                     handleRocketNameSearch={handleRocketNameSearch}

@@ -5,6 +5,7 @@ export const LAUNCHES_QUERY = gql`
         $rocketName: String!
         $missionName: String!
         $launchYear: String!
+        $offset: Int!
     ) {
         launches(
             find: {
@@ -14,6 +15,8 @@ export const LAUNCHES_QUERY = gql`
             }
             order: "asc"
             sort: "launch_date_local"
+            limit: 10
+            offset: $offset
         ) {
             id
             launch_year
