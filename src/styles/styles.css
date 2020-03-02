@@ -48,15 +48,11 @@
 
 
 .launch-date {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 300;
 }
 .launch-details {
     font-size: 1.4rem;
-}
-.launch-header {
-    display: flex;
-    justify-content: space-between;
 }
 .launch-mission {
     font-size: 1.8rem;
