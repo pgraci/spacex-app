@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {useQuery} from '@apollo/react-hooks';
+import {InView} from 'react-intersection-observer';
 
 import {uniqBy} from 'lodash';
 import {formatDate} from '../utils/date_helpers';
@@ -49,15 +50,28 @@ const renderThumbnail = (url: string) => {
     );
 };
 
-const handleScroll = ({currentTarget}: any, onLoadMore: any) => {
-    console.log('loading more');
-    if (
-        currentTarget.scrollTop + currentTarget.clientHeight >=
-        currentTarget.scrollHeight
-    ) {
-        onLoadMore();
-    }
-};
+const offsetY = '10px';
+
+const renderTrigger = (offsetY: string) => ({
+    inView,
+    ref
+}: {
+    inView: boolean;
+    ref: any;
+}) => (
+    <div
+        style={{
+            height: '1px',
+            width: '100 %',
+            visibility: 'hidden',
+            pointerEvents: 'none',
+            color: 'transparent',
+            overflow: 'hidden',
+            position: 'relative'
+        }}
+        ref={ref}
+    />
+);
 
 const renderLaunchList = (launches: any) =>
     launches.map(
@@ -114,16 +128,25 @@ const Launches = ({rocketName, missionName, launchYear}: Props) => {
             });
         }
     };
+    const handleInView = (inView: boolean) => {
+        if (inView) {
+            handleLoadMore();
+        }
+    };
+    const trigger = renderTrigger(offsetY);
 
     // SpaceX GQL server returns duplicate data at times
     const launches = uniqBy(data.launches, 'id');
-
     return (
-        <div
-            onScroll={e => handleScroll(e, handleLoadMore)}
-            className="launches"
-        >
+        <div className="launches">
             {renderLaunchList(launches as any)}
+            <InView
+                onChange={handleInView}
+                rootMargin={`${offsetY} 0px 0px`}
+                threshold={0}
+            >
+                {trigger}
+            </InView>
         </div>
     );
 };
