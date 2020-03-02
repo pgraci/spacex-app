@@ -12,22 +12,39 @@
 
 .search {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 
     padding-bottom: 2rem;
 }
 
 .search-input {
+    box-sizing: border-box;
     border-color: hsl(0, 0%, 80%);
     border-radius: 0.4rem;
     border-style: solid;
     border-width: 0.1rem;
     padding: 1rem;
-    width: 30%;
+    margin-bottom: 1rem;
+    /* width: 100%; */
 }
 
-.search-year {
-    width: 30%;
+/* .search-year {
+    width: 100%;
+} */
+
+@media screen and (min-width: 600px) {
+    .search {
+        flex-direction: row;
+    }
+    .search-input {
+        width: 30%;
+        margin-bottom: 0;
+    }
+
+    .search-year {
+        width: 30%;
+    }
 }
 
 .logo {
