@@ -39,15 +39,13 @@ const renderVideoLink = (url: string) => {
 };
 
 const renderThumbnail = (url: string) => {
-    if (!url) return;
-    const videoId = url.replace('https://www.youtube.com/watch?v=', '');
-    return (
-        <img
-            src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-            alt="thumbnail"
-            className="launch-image"
-        />
-    );
+    const thumbnail = !url
+        ? '/spacex.jpg'
+        : `https://img.youtube.com/vi/${url.replace(
+              'https://www.youtube.com/watch?v=',
+              ''
+          )}/hqdefault.jpg`;
+    return <img src={thumbnail} alt="thumbnail" className="launch-image" />;
 };
 
 const offsetY = '10px';
