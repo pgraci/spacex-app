@@ -3,7 +3,7 @@ import React from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 
-import {slugify} from '../utils/string_helpers';
+import {uniqBy} from 'lodash';
 import {formatDate} from '../utils/date_helpers';
 
 import Loader from './Loader';
@@ -20,6 +20,8 @@ const LAUNCHES_QUERY = gql`
                 mission_name: $missionName
                 launch_year: $launchYear
             }
+            order: "asc"
+            sort: "launch_date_local"
         ) {
             id
             launch_year
@@ -46,6 +48,16 @@ const renderVideoLink = url => {
     );
 };
 
+const renderLaunches = launches =>
+    launches.map(({id, launch_date_local, links, mission_name, rocket}) => (
+        <div key={id} className="launch-wrapper">
+            <p className="launch-date">{formatDate(launch_date_local)}</p>
+            <p className="launch-mission">MISSION: {mission_name}</p>
+            <p className="launch-rocket">ROCKET: {rocket.rocket_name}</p>
+            {renderVideoLink(links.video_link)}
+        </div>
+    ));
+
 const LaunchList = ({rocketName, missionName, launchYear}) => {
     const {loading, error, data} = useQuery(LAUNCHES_QUERY, {
         variables: {rocketName, missionName, launchYear}
@@ -58,26 +70,10 @@ const LaunchList = ({rocketName, missionName, launchYear}) => {
         return <p className="launch-mission">No matching launches found.</p>;
     }
 
-    return (
-        data &&
-        data.launches.map(
-            ({id, launch_date_local, links, mission_name, rocket}) => (
-                <div
-                    key={`${id}-${slugify(mission_name)}-${launch_date_local}`}
-                    className="launch-wrapper"
-                >
-                    <p className="launch-date">
-                        {formatDate(launch_date_local)}
-                    </p>
-                    <p className="launch-mission">MISSION: {mission_name}</p>
-                    <p className="launch-rocket">
-                        ROCKET: {rocket.rocket_name}
-                    </p>
-                    {renderVideoLink(links.video_link)}
-                </div>
-            )
-        )
-    );
+    // SpaceX GQL server returns duplicate data at times
+    const launches = uniqBy(data.launches, 'id');
+
+    return renderLaunches(launches);
 };
 
 export default LaunchList;

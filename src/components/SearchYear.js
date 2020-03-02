@@ -4,6 +4,10 @@ import Select from 'react-select';
 const SearchYear = ({handleYearSearch, searchYear}) => {
     const options = [
         {
+            value: '',
+            label: 'All Years'
+        },
+        {
             value: '2020',
             label: '2020'
         },

@@ -3,7 +3,7 @@ import React from 'react';
 import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks';
 
-import debounce from 'lodash.debounce';
+import {debounce} from 'lodash';
 
 import logo from '../assets/logo.svg';
 import '../styles/styles.css';
