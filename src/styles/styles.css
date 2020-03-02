@@ -10,6 +10,26 @@
     align-items: center;
 }
 
+.search {
+    display: flex;
+    justify-content: space-between;
+
+    padding-bottom: 2rem;
+}
+
+.search-input {
+    border-color: hsl(0, 0%, 80%);
+    border-radius: 0.4rem;
+    border-style: solid;
+    border-width: 0.1rem;
+    padding: 1rem;
+    width: 30%;
+}
+
+.search-year {
+    width: 30%;
+}
+
 .logo {
     height: 4rem;
 }
@@ -37,4 +57,50 @@
 }
 .launch-details {
     font-size: 1.4rem;
+}
+
+.loader {
+    animation: 2s linear infinite svg-animation;
+    max-width: 100px;
+    width: 5rem;
+}
+
+.loader-circle {
+    animation: 1.4s ease-in-out infinite both circle-animation;
+    display: block;
+    fill: transparent;
+    stroke: #2f3d4c;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 280;
+    stroke-width: 10px;
+    transform-origin: 50% 50%;
+}
+
+@keyframes svg-animation {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+@keyframes circle-animation {
+    0%,
+    25% {
+        stroke-dashoffset: 280;
+        transform: rotate(0);
+    }
+
+    50%,
+    75% {
+        stroke-dashoffset: 75;
+        transform: rotate(45deg);
+    }
+
+    100% {
+        stroke-dashoffset: 280;
+        transform: rotate(360deg);
+    }
 }
