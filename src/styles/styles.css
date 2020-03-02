@@ -46,29 +46,31 @@
     height: 4rem;
 }
 
-.launch-filter {
-    font-size: 1rem;
-    width: 12rem;
+
+.launch-date {
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+.launch-details {
+    font-size: 1.4rem;
+}
+.launch-header {
+    display: flex;
+    justify-content: space-between;
+}
+.launch-mission {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.launch-rocket {
+    font-size: 1.6rem;
 }
 .launch-wrapper {
     border: 0.1rem solid #eaeaea;
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 1rem;
-}
-.launch-mission {
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    font-weight: 300;
-}
-.launch-rocket {
-    font-size: 1.6rem;
-}
-.launch-date {
-    font-size: 1.2rem;
-}
-.launch-details {
-    font-size: 1.4rem;
 }
 
 .loader {

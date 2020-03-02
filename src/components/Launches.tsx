@@ -40,8 +40,10 @@ const renderVideoLink = (url: string) => {
 const renderLaunchList = (launches: any) =>
     launches.map(({id, launch_date_local, links, mission_name, rocket}: Launch) => (
         <div key={id} className="launch-wrapper">
-            <p className="launch-date">{formatDate(launch_date_local)}</p>
-            <p className="launch-mission">MISSION: {mission_name}</p>
+            <div className="launch-header">
+                <div className="launch-mission">MISSION: {mission_name}</div>
+                <div className="launch-date">{formatDate(launch_date_local)}</div>
+            </div>
             <p className="launch-rocket">ROCKET: {rocket.rocket_name}</p>
             {renderVideoLink(links.video_link)}
         </div>
