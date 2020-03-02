@@ -52,13 +52,13 @@ function App() {
                 Search The SpaceX GraphQL server for upcoming and past SpaceX
                 launches.
             </h1>
-            <Search
-                handleRocketNameSearch={handleRocketNameSearch}
-                handleMissionNameSearch={handleMissionNameSearch}
-                handleYearSearch={handleYearSearch}
-                searchYear={searchYear}
-            />
             <ApolloProvider client={client}>
+                <Search
+                    handleRocketNameSearch={handleRocketNameSearch}
+                    handleMissionNameSearch={handleMissionNameSearch}
+                    handleYearSearch={handleYearSearch}
+                    searchYear={searchYear}
+                />
                 <LaunchList
                     rocketName={rocketName}
                     missionName={missionName}

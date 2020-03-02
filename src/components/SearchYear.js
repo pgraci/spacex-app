@@ -1,89 +1,52 @@
 import React from 'react';
 import Select from 'react-select';
 
-const SearchYear = ({handleYearSearch, searchYear}) => {
-    const options = [
+import {useQuery} from '@apollo/react-hooks';
+import {gql} from 'apollo-boost';
+import {uniqBy} from 'lodash';
+
+const LAUNCH_YEARS_QUERY = gql`
+    {
+        launches(order: "desc", sort: "launch_year") {
+            launch_year
+        }
+    }
+`;
+
+const renderOptions = options => {
+    const allYearsOptions = [
         {
             value: '',
             label: 'All Years'
-        },
-        {
-            value: '2020',
-            label: '2020'
-        },
-        {
-            value: '2019',
-            label: '2019'
-        },
-        {
-            value: '2018',
-            label: '2018'
-        },
-        {
-            value: '2017',
-            label: '2017'
-        },
-        {
-            value: '2016',
-            label: '2016'
-        },
-        {
-            value: '2015',
-            label: '2015'
-        },
-        {
-            value: '2014',
-            label: '2014'
-        },
-        {
-            value: '2013',
-            label: '2013'
-        },
-        {
-            value: '2012',
-            label: '2012'
-        },
-        {
-            value: '2011',
-            label: '2011'
-        },
-        {
-            value: '2010',
-            label: '2010'
-        },
-        {
-            value: '2009',
-            label: '2009'
-        },
-        {
-            value: '2008',
-            label: '2008'
-        },
-        {
-            value: '2007',
-            label: '2007'
-        },
-        {
-            value: '2006',
-            label: '2006'
         }
     ];
+    const launchOptions = options.map(option => ({
+        value: option.launch_year,
+        label: option.launch_year
+    }));
 
-    const renderOptions = options.map(option => (
-        <option key={option.value} value={option.value}>
-            {option.displayValue}
-        </option>
-    ));
+    return [...allYearsOptions, ...launchOptions];
+};
+
+const SearchYear = ({handleYearSearch, searchYear}) => {
+    const {loading, error, data} = useQuery(LAUNCH_YEARS_QUERY);
+
+    if (loading) return <p className="search-year">Loading...</p>;
+    if (error) return <p className="search-year">Error :(</p>;
+
+    if (!data.launches.length) {
+        return <p className="search-year">Error loading launch years</p>;
+    }
+
+    const options = uniqBy(data.launches, 'launch_year');
 
     return (
         <Select
             onChange={handleYearSearch}
             value={searchYear}
-            options={options}
+            options={renderOptions(options)}
             className="search-year"
-        >
-            {renderOptions}
-        </Select>
+        />
     );
 };
 
