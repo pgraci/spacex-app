@@ -1,41 +1,12 @@
 import React from 'react';
 
 import {useQuery} from '@apollo/react-hooks';
-import {gql} from 'apollo-boost';
 
 import {uniqBy} from 'lodash';
 import {formatDate} from '../utils/date_helpers';
+import {LAUNCHES_QUERY} from '../data/queries';
 
 import Loader from './Loader';
-
-const LAUNCHES_QUERY = gql`
-    query Launches(
-        $rocketName: String!
-        $missionName: String!
-        $launchYear: String!
-    ) {
-        launches(
-            find: {
-                rocket_name: $rocketName
-                mission_name: $missionName
-                launch_year: $launchYear
-            }
-            order: "asc"
-            sort: "launch_date_local"
-        ) {
-            id
-            launch_year
-            launch_date_local
-            links {
-                video_link
-            }
-            mission_name
-            rocket {
-                rocket_name
-            }
-        }
-    }
-`;
 
 const renderVideoLink = url => {
     if (!url) return;

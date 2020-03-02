@@ -2,16 +2,9 @@ import React from 'react';
 import Select from 'react-select';
 
 import {useQuery} from '@apollo/react-hooks';
-import {gql} from 'apollo-boost';
 import {uniqBy} from 'lodash';
 
-const LAUNCH_YEARS_QUERY = gql`
-    {
-        launches(order: "desc", sort: "launch_year") {
-            launch_year
-        }
-    }
-`;
+import {LAUNCH_YEARS_QUERY} from '../data/queries';
 
 const renderOptions = options => {
     const allYearsOptions = [
