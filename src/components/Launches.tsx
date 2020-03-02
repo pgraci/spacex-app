@@ -29,11 +29,23 @@ interface Launch {
 const renderVideoLink = (url: string) => {
     if (!url) return;
     return (
-        <p className="launch-details">
+        <p className="launch-link">
             <a href={url} target="youtube">
                 {url}
             </a>
         </p>
+    );
+};
+
+const renderThumbnail = (url: string) => {
+    if (!url) return;
+    const videoId = url.replace('https://www.youtube.com/watch?v=', '');
+    return (
+        <img
+            src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+            alt="thumbnail"
+            className="launch-image"
+        />
     );
 };
 
@@ -51,16 +63,19 @@ const renderLaunchList = (launches: any) =>
     launches.map(
         ({id, launch_date_local, links, mission_name, rocket}: Launch) => (
             <div key={id} className="launch">
-                <div className="launch-header">
+                {renderThumbnail(links.video_link)}
+                <div className="launch-details">
                     <div className="launch-mission">
                         MISSION: {mission_name}
                     </div>
                     <div className="launch-date">
                         {formatDate(launch_date_local)}
                     </div>
+                    <p className="launch-rocket">
+                        ROCKET: {rocket.rocket_name}
+                    </p>
+                    {renderVideoLink(links.video_link)}
                 </div>
-                <p className="launch-rocket">ROCKET: {rocket.rocket_name}</p>
-                {renderVideoLink(links.video_link)}
             </div>
         )
     );

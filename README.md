@@ -4,6 +4,12 @@
 
 Implements a React SPA using Typescript and ApolloClient to consume the SpaceX GraphQL server data.
 
+An initial result set of 10 launches is loaded. As the user scrolls in the app, more results are fetched and loaded.
+
+Searches by Rocket name, Mission name, and Year are also supported.
+
+Available years are populated by a seperate query, to limit the options to the available result set.
+
 ## Install dependencies
 
 ### `yarn`

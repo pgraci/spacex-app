@@ -3,6 +3,8 @@ html {
 }
 body {
     font-family: 'Cabin', sans-serif;
+    background-color: #000000;
+    color: #09090a;
 }
 
 a {

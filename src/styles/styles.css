@@ -6,6 +6,7 @@
 
 .app-header {
     height: 18vh;
+    color: #eaeaea;
 }
 
 .logo {
@@ -35,13 +36,24 @@
 .launches {
     height: 56vh;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .launch {
-    border: 0.1rem solid #eaeaea;
+    background-color: #fff;
     padding: 1rem;
     margin-bottom: 1rem;
-    border-radius: 1rem;
+    display: flex;
+}
+
+.launch-details {
+    font-size: 1.4rem;
+    margin-left: 1rem;
+}
+
+.launch-image {
+    width: 16rem;
+    height: auto;
 }
 
 .launch-date {
@@ -49,14 +61,14 @@
     font-weight: 300;
 }
 
-.launch-details {
-    font-size: 1.4rem;
+.launch-link {
+    font-size: 1rem;
 }
 
 .launch-mission {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 300;
 }
 
 .launch-rocket {
@@ -73,7 +85,7 @@
     animation: 1.4s ease-in-out infinite both circle-animation;
     display: block;
     fill: transparent;
-    stroke: #2f3d4c;
+    stroke: #eaeaea;
     stroke-linecap: round;
     stroke-dasharray: 283;
     stroke-dashoffset: 280;
@@ -111,7 +123,7 @@
 
 @media screen and (min-width: 600px) {
     .app-header {
-        height: 8vh;
+        height: 10rem;
     }
 
     .search {
