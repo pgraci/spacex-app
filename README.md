@@ -10,6 +10,10 @@ Searches by Rocket name, Mission name, and Year are also supported.
 
 Available years are populated by a seperate query, to limit the options to the available result set.
 
+[Demo](https://spacex-app.pgraci.now.sh/)
+
+* caveat this was a one day effort, and I got tired and lazy to fix all the typings :/ will update all the `anys` when I have more time.
+
 ## Install dependencies
 
 ### `yarn`
