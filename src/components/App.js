@@ -1,21 +1,16 @@
 import React from 'react';
 
-import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks';
-
 import {debounce} from 'lodash';
+import client from '../data/client';
 
 import logo from '../assets/logo.svg';
 import '../styles/styles.css';
 
-import LaunchList from './LaunchList';
+import Launches from './Launches';
 import Search from './Search';
 
-const client = new ApolloClient({
-    uri: 'https://api.spacex.land/graphql/'
-});
-
-function App() {
+const App = () => {
     const [rocketName, setRocketName] = React.useState('');
     const [missionName, setMissionName] = React.useState('');
     const [searchYear, setSearchYear] = React.useState({
@@ -59,7 +54,7 @@ function App() {
                     handleYearSearch={handleYearSearch}
                     searchYear={searchYear}
                 />
-                <LaunchList
+                <Launches
                     rocketName={rocketName}
                     missionName={missionName}
                     launchYear={searchYear.value}
@@ -67,6 +62,6 @@ function App() {
             </ApolloProvider>
         </div>
     );
-}
+};
 
 export default App;

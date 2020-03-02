@@ -19,7 +19,7 @@ const renderVideoLink = url => {
     );
 };
 
-const renderLaunches = launches =>
+const renderLaunchList = launches =>
     launches.map(({id, launch_date_local, links, mission_name, rocket}) => (
         <div key={id} className="launch-wrapper">
             <p className="launch-date">{formatDate(launch_date_local)}</p>
@@ -29,7 +29,7 @@ const renderLaunches = launches =>
         </div>
     ));
 
-const LaunchList = ({rocketName, missionName, launchYear}) => {
+const Launches = ({rocketName, missionName, launchYear}) => {
     const {loading, error, data} = useQuery(LAUNCHES_QUERY, {
         variables: {rocketName, missionName, launchYear}
     });
@@ -44,7 +44,7 @@ const LaunchList = ({rocketName, missionName, launchYear}) => {
     // SpaceX GQL server returns duplicate data at times
     const launches = uniqBy(data.launches, 'id');
 
-    return renderLaunches(launches);
+    return renderLaunchList(launches);
 };
 
-export default LaunchList;
+export default Launches;
